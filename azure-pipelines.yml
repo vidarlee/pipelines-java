@@ -19,3 +19,9 @@ jobs:
       TargetFolder: $(Build.ArtifactStagingDirectory)
   - upload: $(Build.ArtifactStagingDirectory)
     artifact: drop
+- deployment: VMDeploy
+  displayName: HW207
+  environment:
+    name:  testENV
+    resourceType: VirtualMachine
+    tags: HW207
