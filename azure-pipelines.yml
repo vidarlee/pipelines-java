@@ -3,10 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-jobs:
-- deployment: VMDeploy
-  displayName: HW207
-  environment:
-    name:  testEnv
-    resourceType: VirtualMachine
-    tags: HW207
+steps:
+- task: SSH@0
+  displayName: 'Run shell inline on remote machine'
+  inputs:
+    sshEndpoint: HW207
+    runOptions: inline
+
+    inline: cat /etc/*release
