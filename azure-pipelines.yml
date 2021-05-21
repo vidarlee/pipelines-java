@@ -10,8 +10,9 @@ jobs:
     inputs:
       mavenPomFile: 'pom.xml'
   - task: PublishBuildArtifacts@1
-    displayName: 'Copy Files to artifact staging directory'
+    displayName: 'PublishBuildArtifacts'
     inputs:
+      pathtoPublish: '$(System.DefaultWorkingDirectory)'
       artifactName: Helloworld
 
 - job: Deploy
@@ -24,3 +25,7 @@ jobs:
     displayName: 'Download Build Artifacts'
     inputs:
       artifactName: Helloworld
+      downloadPath: $(System.DefaultWorkingDirectory)
+      
+  dependsOn: Build
+  condition: succeeded()
