@@ -2,18 +2,20 @@ jobs:
 - job: Build
   displayName: Build Maven Project
   pool:
-    name: Azure Pipelines
-    demands: agent.os -equals Linux
+    vmImage: 'Ubuntu-16.04'
   steps:
   - task: Maven@3
     displayName: 'Maven Package'
     inputs:
       mavenPomFile: 'pom.xml'
-  - task: PublishBuildArtifacts@1
-    displayName: 'PublishBuildArtifacts'
+  - task: CopyFiles@2
+    displayName: 'Copy Files to artifact staging directory'
     inputs:
-      pathtoPublish: '$(System.DefaultWorkingDirectory)'
-      artifactName: Helloworld
+      SourceFolder: '$(System.DefaultWorkingDirectory)'
+      Contents: '**/target/*.?(war|jar)'
+      TargetFolder: $(Build.ArtifactStagingDirectory)
+  - upload: $(Build.ArtifactStagingDirectory)
+    artifact: drop
 
 - job: Deploy
   pool:
