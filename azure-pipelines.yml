@@ -2,7 +2,8 @@ jobs:
 - job: Build
   displayName: Build Maven Project
   pool:
-    vmImage: 'Ubuntu-16.04'
+    name: 'Azure Pipelines'
+    demands: agent.os -equals Linux
   steps:
   - task: Maven@3
     displayName: 'Maven Package'
@@ -19,7 +20,7 @@ jobs:
 
 - job: Deploy
   pool:
-    name: Azure Pipelines
+    name: 'Azure Pipelines'
     demands: agent.os -equals Linux
   steps:
   - checkout: none
