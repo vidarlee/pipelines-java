@@ -2,7 +2,7 @@ jobs:
 - job: Build
   displayName: Build Maven Project
   pool:
-    name: Azure Pipeline
+    name: Azure Pipelines
     demands: agent.os -equals Linux
   steps:
   - task: Maven@3
@@ -17,7 +17,7 @@ jobs:
 
 - job: Deploy
   pool:
-    name: Azure Pipeline
+    name: Azure Pipelines
     demands: agent.os -equals Linux
   steps:
   - checkout: none
