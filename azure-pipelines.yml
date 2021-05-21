@@ -1,9 +1,6 @@
 jobs:
 - job: Build
   displayName: Build Maven Project
-  pool:
-    name: 'Azure Pipelines'
-    demands: agent.os -equals Linux
   steps:
   - task: Maven@3
     displayName: 'Maven Package'
@@ -19,9 +16,6 @@ jobs:
     artifact: drop
 
 - job: Deploy
-  pool:
-    name: 'Azure Pipelines'
-    demands: agent.os -equals Linux
   steps:
   - checkout: none
   - task: DownloadBuildArtifacts@0
