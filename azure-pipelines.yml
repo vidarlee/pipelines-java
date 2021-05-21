@@ -2,8 +2,8 @@ jobs:
 - job: Build
   displayName: Build Maven Project
   pool:
-    name: ai-iaas-1-0002
-    demands: agent.os -equals Linx
+    name: default
+    demands: agent.os -equals Linux
   steps:
   - task: Maven@3
     displayName: 'Maven Package'
