@@ -5,6 +5,10 @@ jobs:
    name: default
    demands: agent.os -equals Linux
   steps:
+  - task: Maven@3
+    displayName: 'Maven Package'
+    inputs:
+      mavenPomFile: 'pom.xml'
   - task: cURLUploader@2
     displayName: 'Curl Upload'
     inputs:
