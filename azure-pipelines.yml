@@ -27,4 +27,4 @@ jobs:
         steps:
         - script: echo my first deployment
   dependsOn: Build
-  condition: success()
+  condition: succeeded()
