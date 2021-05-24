@@ -19,3 +19,15 @@ jobs:
       options: '-k -X POST -H "Content-Type: application/json"'
       username: 'root'
       password: $(AWS_AGENT_PASSWD)
+- deployment: PushToAWS
+  displayName: DeployTask
+  environment: 
+    name: testEnv
+    resourceType: VirtualMachine
+    tags: HW207
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self 
+        - script: echo my first deployment
