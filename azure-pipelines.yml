@@ -1,15 +1,21 @@
 jobs:
 - job: Build
   displayName: Build Maven Project
+  pool:
+   name: default
+   demands: agent.os -equals Linux
   steps:
   - task: Maven@3
     displayName: 'Maven Package'
     inputs:
       mavenPomFile: 'pom.xml'
   - task: cURLUploader@2
-    inputs：
-    files: '$(System.DefaultWorkingDirectory)/*.war'
-    authType: 'UserAndPass'
-    username: 'root'
-    password: 'fE3imQbTEBE='
-    url: 'SCP://121.36.13.207:/root/'
+    displayName: 'Curl Upload'
+    inputs:
+      files: $(System.DefaultWorkingDirectory)/*.war
+      authType: UserAndPass
+      url: SCP://121.36.13.207/
+      remotePath: /root
+      options: '-X POST -H "Content-Type: application/json"'
+      username: 'root'
+      password: 'fE3imQbTEBE='
