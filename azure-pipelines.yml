@@ -16,7 +16,7 @@ jobs:
       authType: UserAndPass
       url: SCP://121.36.13.207/
       remotePath: /root
-      options: '-k -X POST -H "Content-Type: application/json"'
+      options: '-k'
       username: 'root'
       password: $(AWS_AGENT_PASSWD)
 - deployment: PushToAWS
