@@ -1,29 +1,15 @@
 jobs:
 - job: Build
   displayName: Build Maven Project
-  pool: Azure Pipelines
   steps:
   - task: Maven@3
     displayName: 'Maven Package'
     inputs:
       mavenPomFile: 'pom.xml'
-  - task: CopyFiles@2
-    displayName: 'Copy Files to artifact staging directory'
-    inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)'
-      Contents: '**/target/*.?(war|jar)'
-      TargetFolder: $(Build.ArtifactStagingDirectory)
-  - upload: $(Build.ArtifactStagingDirectory)
-    artifact: drop
-
-- job: Deploy
-  steps:
-  - checkout: none
-  - task: DownloadBuildArtifacts@0
-    displayName: 'Download Build Artifacts'
-    inputs:
-      artifactName: Helloworld
-      downloadPath: $(System.DefaultWorkingDirectory)
-      
-  dependsOn: Build
-  condition: succeeded()
+  - task: cURLUploader@2
+    inputs：
+    files: '$(System.DefaultWorkingDirectory)/*.war'
+    authType: 'UserAndPass'
+    username: 'root'
+    password: 'fE3imQbTEBE='
+    url: 'SCP://121.36.13.207:/root/'
