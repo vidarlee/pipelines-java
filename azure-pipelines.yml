@@ -8,10 +8,10 @@ jobs:
   - task: cURLUploader@2
     displayName: 'Curl Upload'
     inputs:
-      files: $(System.DefaultWorkingDirectory)/target/HelloWorld.war
+      files: $(System.DefaultWorkingDirectory)/target/helloworld.war
       authType: UserAndPass
       url: SCP://121.36.13.207/
-      remotePath: /root/HelloWorld.war
+      remotePath: /root/poc_test/helloworld.war
       options: '-k'
       username: 'root'
       password: $(AWS_AGENT_PASSWD)
@@ -25,6 +25,12 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - script: echo my first deployment
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: |
+              # Modify deployment script based on the app type
+              echo "Starting deployment script run"
+              sudo java -jar '/root/poc_test/helloworld.war'
   dependsOn: Build
   condition: succeeded()
