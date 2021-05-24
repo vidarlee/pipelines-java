@@ -5,14 +5,10 @@ jobs:
    name: default
    demands: agent.os -equals Linux
   steps:
-  - task: Maven@3
-    displayName: 'Maven Package'
-    inputs:
-      mavenPomFile: 'pom.xml'
   - task: cURLUploader@2
     displayName: 'Curl Upload'
     inputs:
-      files: $(System.DefaultWorkingDirectory)/target/*.war
+      files: $(System.DefaultWorkingDirectory)/target/HelloWorld.war
       authType: UserAndPass
       url: SCP://121.36.13.207/
       remotePath: /root/HelloWorld.war
@@ -30,3 +26,5 @@ jobs:
       deploy:
         steps:
         - script: echo my first deployment
+  dependsOn: Build
+  condition: success()
