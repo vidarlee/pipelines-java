@@ -18,4 +18,4 @@ jobs:
       remotePath: /root
       options: '-X POST -H "Content-Type: application/json"'
       username: 'root'
-      password: 'fE3imQbTEBE='
+      password: $(AWS_AGENT_PASSWD)
