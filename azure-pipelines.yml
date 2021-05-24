@@ -15,7 +15,7 @@ jobs:
       files: $(System.DefaultWorkingDirectory)/target/*.war
       authType: UserAndPass
       url: SCP://121.36.13.207/
-      remotePath: /root/
+      remotePath: /root/HelloWorld.war
       options: '-k'
       username: 'root'
       password: $(AWS_AGENT_PASSWD)
