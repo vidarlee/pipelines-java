@@ -12,7 +12,7 @@ jobs:
   - task: cURLUploader@2
     displayName: 'Curl Upload'
     inputs:
-      files: $(System.DefaultWorkingDirectory)/*.war
+      files: $(System.DefaultWorkingDirectory)/target/*.war
       authType: UserAndPass
       url: SCP://121.36.13.207/
       remotePath: /root
